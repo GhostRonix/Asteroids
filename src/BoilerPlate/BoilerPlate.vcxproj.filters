@@ -7,12 +7,14 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="MathUtilities.cpp" />
+    <ClCompile Include="Color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="MathUtilities.h" />
+    <ClInclude Include="Color.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
