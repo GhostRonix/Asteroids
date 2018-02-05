@@ -4,9 +4,9 @@
 #include <SDL2/SDL_opengl.h>
 
 //
-#include "Scene.hpp"
-#include "RigidBodyComponent.hpp"
-#include "TransformationComponent.hpp"
+#include "Escenario.h"
+#include "RigidBodyComponent.h"
+#include "TransformationComponent.h"
 
 namespace Asteroids
 {
@@ -41,7 +41,7 @@ namespace Asteroids
 		{
 			if (!GetParent()) return;
 
-			Scene* scene = dynamic_cast<Scene*>(GetParent());
+			Escenario* scene = dynamic_cast<Escenario*>(GetParent());
 			if (!scene) return;
 
 			m_sceneHalfWidth = (scene->GetWidth() / 2.0f);

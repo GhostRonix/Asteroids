@@ -7,7 +7,7 @@
 
 //
 #include "Vector2.h"
-#include "Entity.hpp"
+#include "Entity.h"
 //#include "Bullet.hpp"
 
 typedef std::vector<Engine::Math::Vector2> points_set;

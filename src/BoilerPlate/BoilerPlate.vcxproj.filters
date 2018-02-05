@@ -12,6 +12,14 @@
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="PlayerShip.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Constantes.cpp" />
+    <ClCompile Include="TransformationComponent.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="IUpdate.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="UniqueID.cpp" />
+    <ClCompile Include="Escenario.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -23,6 +31,15 @@
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Constantes.h" />
+    <ClInclude Include="TransformationComponent.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="IUpdate.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="IRender.h" />
+    <ClInclude Include="UniqueID.h" />
+    <ClInclude Include="Escenario.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

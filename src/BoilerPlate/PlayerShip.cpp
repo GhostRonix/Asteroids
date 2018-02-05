@@ -4,7 +4,7 @@
 //
 #include <cmath>
 #include "MathUtilities.h"
-#include "Constants.h"
+#include "Constantes.h"
 
 namespace Asteroids
 {
@@ -156,7 +156,7 @@ namespace Asteroids
 			Entity::Render(GL_LINE_LOOP, m_ships[m_currentIndex], m_currentColor);
 		}
 
-		void Ship::Respawn()
+		/*void Ship::Respawn()
 		{
 			SetCollision(false);
 			m_pulse = true;
@@ -167,7 +167,7 @@ namespace Asteroids
 			m_state = EntityState::RESPAWNING;
 		}
 
-		Bullet * Ship::Shoot() const
+		/*Bullet * Ship::Shoot() const
 		{
 			float shootingAngle = m_transforms->GetAngleInDegrees() + ANGLE_OFFSET;
 			float speed = m_currentSpeed + BULLET_SPEED;
@@ -177,7 +177,7 @@ namespace Asteroids
 				Engine::Math::Vector2(speed),
 				shootingAngle
 			);
-		}
+		}*/
 
 		void Ship::CalculateMass()
 		{

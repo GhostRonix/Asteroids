@@ -2,7 +2,29 @@
 
 
 
-namespace Math {
+
+//PRUEBA 2
+
+
+#include "Constantes.h"
+
+namespace Engine
+{
+	namespace Math
+	{
+		float DegreesToRadians(float angleInRadians)
+		{
+			return angleInRadians * (PI / 180);
+
+		}
+		float RadiansToDegrees(float angleInDegrees)
+		{
+			return angleInDegrees * (180 / PI);
+		}
+	}
+}
+
+/*namespace Math {
 	MathUtilities::MathUtilities()
 	{}
 
@@ -99,4 +121,4 @@ namespace Math {
 		int end = 1.0;
 		return n;
 	}
-}
+}*/
