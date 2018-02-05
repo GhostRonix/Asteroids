@@ -8,6 +8,7 @@
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="MathUtilities.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -15,6 +16,7 @@
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="MathUtilities.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
