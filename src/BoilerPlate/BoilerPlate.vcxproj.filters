@@ -21,6 +21,9 @@
     <ClCompile Include="UniqueID.cpp" />
     <ClCompile Include="Escenario.cpp" />
     <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="ShipModelConfig.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -42,6 +45,9 @@
     <ClInclude Include="UniqueID.h" />
     <ClInclude Include="Escenario.h" />
     <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ShipModelConfig.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

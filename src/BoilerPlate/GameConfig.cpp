@@ -5,7 +5,7 @@
 #include <algorithm>
 
 //
-#include "Configuration.h"
+#include "ShipModelConfig.h"
 #include "InputManager.h"
 //#include "Asteroid.hpp"
 
@@ -113,8 +113,8 @@ namespace Asteroids
 			// Add bullet to the scene
 			//
 			//m_scene->AddChild(pBullet);
-		}
-	}*/
+		}*/
+	}
 
 	void Game::CreatePlayer()
 	{
@@ -242,6 +242,5 @@ namespace Asteroids
 		{
 			m_bullets.erase(bulletResult);
 		}
-	}
+	}*/
 }
-*/
