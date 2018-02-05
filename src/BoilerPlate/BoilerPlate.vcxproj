@@ -177,6 +177,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="Constantes.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Escenario.cpp" />
+    <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="IUpdate.cpp" />
     <ClCompile Include="main.cpp" />
@@ -198,6 +199,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Escenario.h" />
+    <ClInclude Include="GameConfig.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IRender.h" />
     <ClInclude Include="IUpdate.h" />

@@ -20,6 +20,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="UniqueID.cpp" />
     <ClCompile Include="Escenario.cpp" />
+    <ClCompile Include="GameConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="IRender.h" />
     <ClInclude Include="UniqueID.h" />
     <ClInclude Include="Escenario.h" />
+    <ClInclude Include="GameConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
