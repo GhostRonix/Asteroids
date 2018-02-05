@@ -156,29 +156,7 @@ namespace Asteroids
 			Entity::Render(GL_LINE_LOOP, m_ships[m_currentIndex], m_currentColor);
 		}
 
-		/*void Ship::Respawn()
-		{
-			SetCollision(false);
-			m_pulse = true;
-			m_currentColor = Engine::Math::Vector3(1.0f, 0.0f, 0.0f);
-			m_transforms->Teleport(0.0f, 0.0f);
-			m_transforms->ResetOrientation();
-			m_physics->SetVelocity(Engine::Math::Vector2(0.f, 0.f));
-			m_state = EntityState::RESPAWNING;
-		}
-
-		/*Bullet * Ship::Shoot() const
-		{
-			float shootingAngle = m_transforms->GetAngleInDegrees() + ANGLE_OFFSET;
-			float speed = m_currentSpeed + BULLET_SPEED;
-
-			return new Bullet(
-				m_transforms->GetPosition(),
-				Engine::Math::Vector2(speed),
-				shootingAngle
-			);
-		}*/
-
+	
 		void Ship::CalculateMass()
 		{
 			// TODO: RR: Set the mass, proportional to the ship size (asumming points defines size)

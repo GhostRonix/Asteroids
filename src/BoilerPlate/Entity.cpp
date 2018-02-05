@@ -106,23 +106,7 @@ namespace Asteroids
 			}
 			glEnd();
 
-			//glLoadIdentity();
-			//glBegin(mode);
-			//	int num_segments = 100;
-			//	for (int ii = 0; ii < num_segments; ii++) 
-			//	{
-			//		float theta = 2.0f * Engine::Math::PI * float(ii) / float(num_segments);
-			//		float x = m_radius * cosf(theta);
-			//		float y = m_radius * sinf(theta);
-			//		Engine::Math::Vector2 vertex(
-			//			x + m_transforms->GetPosition().x, 
-			//			y + m_transforms->GetPosition().y);
-			//		glVertex2f(vertex.x, vertex.y);
-			//	}
-			//glEnd();
-
-			// Call base class render
-			//
+		
 			GameObject::Render();
 		}
 
