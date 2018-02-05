@@ -20,14 +20,23 @@ namespace Engine
 			*	CTOR
 			============================*/
 			Vector2();
-			Vector2(float, float);
-			Vector2(float);
+			Vector2(float aux);
+			Vector2(float x, float y);
 			/*============================
 			*	PUBLIC FUNCTIONS
 			============================*/
+			//Getters
+			//
+			float GetX();
+			float GetY();
+			//Setters
+			//
+			void SetX();
+			void SetY();
+			/*--------------------------*/
 			float Lenght() const;
 			float SquaredLenght() const;
-			Vector2 Normalize();
+			float Vector2::Normalize(); //Vector2 -> Normalize 
 
 			/*============================
 			*	OPERATORS
