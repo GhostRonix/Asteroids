@@ -6,12 +6,12 @@ namespace Asteroids
 {
 	namespace Entities
 	{
-		Scene::Scene(Engine::Math::Vector3 background, int width, int height)
+		Escenario::Escenario(Engine::Math::Vector3 background, int width, int height)
 			: m_background(background)
 			, m_width(width)
 			, m_height(height)
 		{}
-		void Scene::Render()
+		void Escenario::Render()
 		{
 			// TODO: RR: Move this to renderer class
 			//

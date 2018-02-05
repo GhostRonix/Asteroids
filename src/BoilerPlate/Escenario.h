@@ -10,13 +10,13 @@ namespace Asteroids
 {
 	namespace Entities
 	{
-		class Scene : public Engine::Core::GameObject
+		class Escenario : public Engine::Core::GameObject
 		{
 		public:
 			/* =============================================================
 			* CTOR
 			* ============================================================= */
-			Scene(Engine::Math::Vector3 background, int width, int height);
+			Escenario(Engine::Math::Vector3 background, int width, int height);
 
 			/* =============================================================
 			* PUBLIC FUNCTIONS
