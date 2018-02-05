@@ -19,34 +19,39 @@ namespace Engine
 		{
 			return 0.0f;
 		}
-		Vector2 Vector2::Normalize()
+		float  Vector2::Normalize()
 		{
-			return Vector2();
+			Lenght();
+			float escalainversa = 1.0f / lenght;
+			x *= escalainversa;
+			y *= escalainversa;
+
+			return lenght;
 		}
 		Vector2 & Vector2::operator=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
-			return ;
+			
 		}
 		Vector2 & Vector2::operator+=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
-			return ;
+			
 		}
 		Vector2 & Vector2::operator-=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
-			return;
+			
 		}
 		Vector2 & Vector2::operator*=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
-			return;
+			
 		}
 		Vector2 & Vector2::operator/=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
-			return;
+			
 		}
 		Vector2 Vector2::operator+(const Vector2 & rhs) const
 		{
