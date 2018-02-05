@@ -1,4 +1,4 @@
-#include "vector3.h"
+#include "Vector3.h"
 
 #include <cmath>
 
@@ -6,35 +6,35 @@ namespace Engine
 {
 	namespace Math
 	{
-		vector3::vector3()
+		Vector3::Vector3()
 			: x(0.0f)
 			, y(0.0f)
 			, z(0.0f)
 			, length(0)
 		{}
 
-		vector3::vector3(float uniform)
+		Vector3::Vector3(float uniform)
 			: x(uniform)
 			, y(uniform)
 			, z(uniform)
 			, length(0)
 		{}
 
-		vector3::vector3(float _x, float _y, float _z)
+		Vector3::Vector3(float _x, float _y, float _z)
 			: x(_x)
 			, y(_y)
 			, z(_z)
 			, length(0)
 		{}
 
-		vector3::vector3(const vector3& other)
+		Vector3::Vector3(const Vector3& other)
 			: x(other.x)
 			, y(other.y)
 			, z(other.z)
 			, length(other.length)
 		{}
 
-		float vector3::Normalize()
+		float Vector3::Normalize()
 		{
 			// Calculating the length
 			Length();
@@ -47,7 +47,7 @@ namespace Engine
 			return length;
 		}
 
-		float vector3::Length()
+		float Vector3::Length()
 		{
 			float lenSquared = x * x + y * y + z * z;
 			if (lenSquared == 0)
@@ -61,7 +61,7 @@ namespace Engine
 			return length;
 		}
 
-		float vector3::LengthSquared() const
+		float Vector3::LengthSquared() const
 		{
 			float lenSquared = x * x + y * y + z * z;
 			if (lenSquared == 0) return 0.0f;
@@ -69,14 +69,14 @@ namespace Engine
 			return lenSquared;
 		}
 
-		void vector3::Scale(float scaleUnit)
+		void Vector3::Scale(float scaleUnit)
 		{
 			x *= scaleUnit;
 			y *= scaleUnit;
 			z *= scaleUnit;
 		}
 
-		float vector3::SetLength(float newLength)
+		float Vector3::SetLength(float newLength)
 		{
 			float oldLen = length;
 			float lenSquared = x * x + y * y + z * z;

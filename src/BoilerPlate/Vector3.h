@@ -4,16 +4,16 @@ namespace Engine
 {
 	namespace Math
 	{
-		class vector3
+		class Vector3
 		{
 		public:
 			/* =============================================================
 			* CTOR
 			* ============================================================= */
-			explicit vector3();
-			explicit vector3(float uniform);
-			explicit vector3(float x, float y, float z);
-			vector3(const vector3& other);
+			explicit Vector3();
+			explicit Vector3(float uniform);
+			explicit Vector3(float x, float y, float z);
+			Vector3(const Vector3& other);
 
 			/* =============================================================
 			* PUBLIC FUNCTIONS

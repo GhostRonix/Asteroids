@@ -10,37 +10,28 @@ namespace Engine
 		class Vector2
 		{
 		public:
+			/* =============================================================
+			* STATIC
+			* ============================================================= */
+			static Vector2 Origin;
 
-			/*============================
-			*	STATIC
-			============================*/
-			static Vector2 origin;
-
-			/*============================
-			*	CTOR
-			============================*/
+			/* =============================================================
+			* CTOR
+			* ============================================================= */
 			Vector2();
-			Vector2(float aux);
+			Vector2(float uniform);
 			Vector2(float x, float y);
-			/*============================
-			*	PUBLIC FUNCTIONS
-			============================*/
-			//Getters
-			//
-			float GetX();
-			float GetY();
-			//Setters
-			//
-			void SetX();
-			void SetY();
-			/*--------------------------*/
-			float Lenght() const;
-			float SquaredLenght() const;
-			float Vector2::Normalize(); //Vector2 -> Normalize 
 
-			/*============================
-			*	OPERATORS
-			============================*/
+			/* =============================================================
+			* PUBLIC FUNCTIONS
+			* ============================================================= */
+			float Length() const;
+			float SquaredLength() const;
+			float Vector2::Normalize();
+
+			/* =============================================================
+			* OPERATORS
+			* ============================================================= */
 			Vector2& operator=(const Vector2& rhs);
 			Vector2& operator+=(const Vector2& rhs);
 			Vector2& operator-=(const Vector2& rhs);
@@ -48,19 +39,20 @@ namespace Engine
 			Vector2& operator/=(const Vector2& rhs);
 			Vector2 operator+(const Vector2& rhs) const;
 			Vector2 operator-(const Vector2& rhs) const;
+			Vector2 operator-() const;
 			Vector2 operator*(const Vector2& rhs) const;
 			Vector2 operator/(const Vector2& rhs) const;
-			bool	operator==(const Vector2& rhs) const;
-			bool	operator!=(const Vector2& rhs) const;
-			friend  Vector2 operator*(float, const Vector2&);
-			friend  Vector2 operator*(const Vector2&, float);
+			bool operator==(const Vector2& rhs) const;
+			bool operator!=(const Vector2& rhs) const;
+			friend Vector2 operator*(float scaleUnit, const Vector2& rhs);
+			friend Vector2 operator*(const Vector2& lhs, float scaleUnit);
 
-			/*============================
-			*	MEMBERS
-			============================*/
+			/* =============================================================
+			* MEMBERS
+			* ============================================================= */
 			float x;
 			float y;
-			float lenght;
+			float length;
 		};
 	}
 }
