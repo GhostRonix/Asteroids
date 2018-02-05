@@ -2,7 +2,7 @@
 
 namespace Colors
 {
-	static class Color
+	 class Color
 	{
 	public:
 		/* CTOR */

@@ -25,22 +25,27 @@ namespace Engine
 		Vector2 & Vector2::operator=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
+			return ;
 		}
 		Vector2 & Vector2::operator+=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
+			return ;
 		}
 		Vector2 & Vector2::operator-=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
+			return;
 		}
 		Vector2 & Vector2::operator*=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
+			return;
 		}
 		Vector2 & Vector2::operator/=(const Vector2 & rhs)
 		{
 			// TODO: insert return statement here
+			return;
 		}
 		Vector2 Vector2::operator+(const Vector2 & rhs) const
 		{
