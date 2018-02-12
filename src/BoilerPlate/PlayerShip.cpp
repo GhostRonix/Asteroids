@@ -1,167 +1,95 @@
 #include "PlayerShip.h"
-#include <SDL2\SDL_opengl.h>
 
-//
-#include <cmath>
-#include "MathUtilities.h"
-#include "Constantes.h"
+
+
+#include "Vector2.h"
+
+
+#include <GL\glew.h>
+#include <SDL2\SDL_opengl.h>
 
 namespace Asteroids
 {
 	namespace Entities
 	{
-		const float ANGLE_OFFSET = 90.0f;
-		const float THRUST = 3.0f;
-		const float MAX_SPEED = 350.0f;
-		const float BULLET_SPEED = 250.f;
-		const float ROTATION_SPEED = 5.0f;
-		const int RESTART_BLINK_FRAME_TIME = 30;
-		const int RESPAWN_TIME = 120;
+		PlayerShip::PlayerShip()
+		{}
 
-		Ship::Ship(const std::vector<points_set> points)
-			: m_ships(points)
-			, m_currentIndex(0)
-			, m_nRespawnTime(0)
-			, m_pulse(false)
-			, m_currentPulseCount(0)
-			, m_totalPulseCount(30)
-			, m_currentColor(Engine::Math::Vector3(1.0f))
+		PlayerShip::PlayerShip(int width, int height)
 		{
-			m_radius = 10.0f;
+			m_position = new Engine::Math::Vector2(Engine::Math::Vector2::origin);
 
-			// Transforms
-			//
-			m_transforms = new Engine::Components::TransformationComponent();
+			/*PD*/
+			/*max dim.*/
+			m_maxwidth = width / 3.0f;
+			m_maxheight = height / 3.0f;
+			/*min dim*/
+			m_minwidth = -width / 3.0f;
+			m_minheight = -height / 3.0f;
 
-			// Attaching transformation component
-			//
-			AttachComponent(m_transforms);
-
-			// Physics
-			//
-			m_physics = new Engine::Components::RigidBodyComponent(
-				Engine::Math::Vector2(0.0f),
-				m_transforms->GetPosition(),
-				1.0f,
-				0.999f
-			);
-
-			// Attaching physics component
-			//
-			AttachComponent(m_physics);
-
-			// Trigger mass calculation
-			//
-			CalculateMass();
-		}
-
-		Ship::~Ship()
-		{
-			// Clear points allocation per model
-			//
-			for (auto model : m_ships)
-			{
-				model.clear();
-			}
-
-			// Clear ships collection
-			//
-			m_ships.clear();
-		}
-
-
-		void Ship::MoveUp() const
-		{
-			m_physics->ApplyForce(
-				Engine::Math::Vector2(THRUST),
-				m_transforms->GetAngleIRadians() + Engine::Math::DegreesToRadians(ANGLE_OFFSET)
-			);
-		}
-
-		void Ship::MoveRight() const
-		{
-			m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() - ROTATION_SPEED);
-		}
-
-		void Ship::MoveLeft() const
-		{
-			m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() + ROTATION_SPEED);
-		}
-
-		void Ship::ChangeShip()
-		{
-			m_currentIndex++;
-			if (m_currentIndex > (m_ships.size() - 1))
-			{
-				m_currentIndex = 0;
-			}
-
-			CalculateMass();
-		}
-
-		void Ship::Update(double deltaTime)
-		{
-			// Clamp speed
-			//
-			m_currentSpeed = fabs(m_physics->GetSpeed());
-			if (m_currentSpeed > MAX_SPEED)
-			{
-				m_physics->SetVelocity(
-					Engine::Math::Vector2(
-					(m_physics->GetVelocity().x / m_currentSpeed) * MAX_SPEED,
-						(m_physics->GetVelocity().y / m_currentSpeed) * MAX_SPEED
-					)
-				);
-
-				m_currentSpeed = MAX_SPEED;
-			}
-
-			Entity::Update(deltaTime);
-		}
-
-		void Ship::Render()
-		{
-			if (!m_canCollide)
-			{
-				if (m_nRespawnTime >= RESPAWN_TIME)
-				{
-					SetCollision(true);
-					m_state = EntityState::NORMAL;
-					m_nRespawnTime = 0;
-					m_pulse = false;
-					m_currentColor = Engine::Math::Vector3(1.0f);
-				}
-
-				m_nRespawnTime++;
-
-				if (m_pulse)
-				{
-					// Pulsing, skip draw frames for a small amount of time
-					if (m_totalPulseCount > m_currentPulseCount)
-					{
-						m_currentPulseCount++;
-						return;
-					}
-
-					// Pulsing, reset pulse after a small amount of time
-					// this will allow for blinking to be spaced and smooth
-					if (m_nUpdates % RESTART_BLINK_FRAME_TIME == 0)
-					{
-						m_currentPulseCount = 0;
-					}
-				}
-			}
-
-			// Draw ship
-			Entity::Render(GL_LINE_LOOP, m_ships[m_currentIndex], m_currentColor);
 		}
 
 	
-		void Ship::CalculateMass()
+
+		PlayerShip::~PlayerShip()
+		{}
+
+
+		//Inline Fucntion to avoid multi-definition problems.
+
+		inline float LigthSpeedWarp(float var, float min, float max)
 		{
-			// TODO: RR: Set the mass, proportional to the ship size (asumming points defines size)
-			//
-			m_physics->SetMass(m_ships[m_currentIndex].size() / 10.0f);
+			if (var < min) return max - (min - var);
+			if (var > max) return min + (var - max);
+			
+			return var;
+
 		}
+		//Update
+
+		void PlayerShip::Update()
+		{}
+
+		void PlayerShip::MoveForward(const Engine::Math::Vector2& auxunit)
+		{
+			float x = m_position -> m_x + auxunit.m_x;
+			float y = m_position -> m_y + auxunit.m_y;
+
+			m_position -> m_x = LigthSpeedWarp(x, m_minwidth, m_maxwidth);
+			m_position -> m_y = LigthSpeedWarp(y, m_minheight, m_minheight);
+		}
+
+		
+
+
+	
+       
+		//Render
+
+
+		void PlayerShip::Render()
+		{
+			glLoadIdentity();
+
+			// Translate
+			glTranslatef(m_position->m_x, m_position->m_y, 0.0f);
+
+			// Drawing the ship
+			glBegin(GL_LINE_LOOP);
+			glVertex2f(0.0f, 20.0f);
+			glVertex2f(12.0f, -10.0f);
+			glVertex2f(6.0f, -4.0f);
+			glVertex2f(-6.0f, -4.0f);
+			glVertex2f(-12.0f, -10.0f);
+			glEnd();
+
+		}
+
+	
+		void PlayerShip::RotateLeft()
+		{}
+
+		void PlayerShip::RotateRight()
+		{}
 	}
 }

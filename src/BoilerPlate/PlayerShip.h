@@ -1,56 +1,51 @@
 #pragma once
-#ifndef _SHIP_H_
-#define _SHIP_H_
+#pragma once
+#ifndef _PLAYER_SHIP_HPP_
+#define _PLAYER_SHIP_HPP_
 
-//
-#include <vector>
-
-//
 #include "Vector2.h"
-#include "Entity.h"
-//#include "Bullet.hpp"
-
-typedef std::vector<Engine::Math::Vector2> points_set;
 
 namespace Asteroids
 {
 	namespace Entities
 	{
-		class Ship : public Entity
+		class PlayerShip
 		{
 		public:
-			/* =============================================================
-			* CTOR
-			* ============================================================= */
-			explicit Ship(const std::vector<points_set> ships);
-			~Ship();
+			/*============================
+			*			CTOR
+			============================*/
+			PlayerShip();
+			PlayerShip(int, int);
+			~PlayerShip();
 
-			/* =============================================================
-			* PUBLIC FUNCTIONS
-			* ============================================================= */
-			void MoveUp() const;
-			void MoveRight() const;
-			void MoveLeft() const;
-			void ChangeShip();
-			void Update(double deltaTime) override;
-			void Render() override;
-			void Respawn();
-			//Bullet* Shoot() const;
+			/*============================
+			*	  PUBLIC FUNCTIONS
+			============================*/
+			void MoveForward(const Engine::Math::Vector2&); //const Engine::Math::Vector2&
+			void Render();
+			void Update();
+			void RotateLeft();
+			void RotateRight();
+			//void Move(const Engine::Math::Vector2& unit);
+
 		private:
-			void CalculateMass();
-			/* =============================================================
-			* MEMBERS
-			* ============================================================= */
-			std::vector<points_set> m_ships;
-			float m_currentSpeed;
-			unsigned int m_currentIndex;
-			int m_nRespawnTime;
-			bool m_pulse = false;
-			int  m_currentPulseCount;
-			int  m_totalPulseCount;
-			Engine::Math::Vector3 m_currentColor;
+			/*============================
+			*		  MEMBERS
+			============================*/
+			Engine::Math::Vector2* m_position;
+			/*MAX*/
+			float m_maxwidth;
+			float m_maxheight;
+			/*MIN*/
+			float m_minwidth;
+			float m_minheight;
+
+			
+
+			
 		};
 	}
 }
 
-#endif // !_SHIP_H_
+#endif // !_PLAYER_SHIP_HPP_

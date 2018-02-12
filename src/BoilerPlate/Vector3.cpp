@@ -1,96 +1,197 @@
-#include "Vector3.h"
+#include "vector3.h"
 
-#include <cmath>
+
+
 
 namespace Engine
+
 {
 	namespace Math
 	{
+
+		Vector3 Vector3::origin = Vector3();
+
 		Vector3::Vector3()
-			: x(0.0f)
-			, y(0.0f)
-			, z(0.0f)
-			, length(0)
+			: m_x(0.0f)
+			, m_y(0.0f)
+			, m_z(0.0f)
+			, m_lenght(0)
 		{}
+
 
 		Vector3::Vector3(float uniform)
-			: x(uniform)
-			, y(uniform)
-			, z(uniform)
-			, length(0)
-		{}
-
-		Vector3::Vector3(float _x, float _y, float _z)
-			: x(_x)
-			, y(_y)
-			, z(_z)
-			, length(0)
-		{}
-
-		Vector3::Vector3(const Vector3& other)
-			: x(other.x)
-			, y(other.y)
-			, z(other.z)
-			, length(other.length)
-		{}
-
-		float Vector3::Normalize()
+			: m_x(uniform)
+			, m_y(uniform)
+			, m_z(uniform)
+			, m_lenght(0.0f)
 		{
-			// Calculating the length
-			Length();
-
-			float inverseScale = 1.0f / length;
-			x *= inverseScale;
-			y *= inverseScale;
-			z *= inverseScale;
-
-			return length;
+			Lenght();
 		}
 
-		float Vector3::Length()
+
+
+		Vector3::Vector3(float x, float y, float z)
+			: m_x(x)
+			, m_y(y)
+			, m_z(z)
+			, m_lenght(0.0f)
 		{
-			float lenSquared = x * x + y * y + z * z;
-			if (lenSquared == 0)
+			Lenght();
+		}
+
+
+
+		Vector3::Vector3(const Vector2& vec2)
+			: m_x(vec2.m_x)
+			, m_y(vec2.m_y)
+			, m_z(0.0f)
+			, m_lenght(0.0f)
+		{
+			Lenght();
+		}
+
+		float Vector3::Lenght() const
+		{
+			return std::sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
+		}
+
+
+
+		float Vector3::SquaredLenght() const
+		{
+			return m_x * m_x + m_y * m_y + m_z * m_z;
+		}
+
+
+
+		Vector3 Vector3::Normalize()
+		{
+			Lenght();
+
+			float inverseScale = 1.0f / m_lenght;
+			m_x *= inverseScale;
+			m_y *= inverseScale;
+			m_z *= inverseScale;
+
+			return m_lenght;
+		}
+
+
+
+
+		Vector3 & Vector3::operator=(const Vector3 & rhs)
+		{
+			if (this == &rhs)
 			{
-				length = 0.0f;
-				return length;
+				return *this;
 			}
 
-			length = std::sqrtf(lenSquared);
+			m_x = rhs.m_x;
+			m_y = rhs.m_y;
+			m_z = rhs.m_z;
 
-			return length;
+			return *this;
 		}
 
-		float Vector3::LengthSquared() const
-		{
-			float lenSquared = x * x + y * y + z * z;
-			if (lenSquared == 0) return 0.0f;
 
-			return lenSquared;
+
+		Vector3 & Vector3::operator+=(const Vector3 & rhs)
+		{
+			m_x = m_x + rhs.m_x;
+			m_y = m_y + rhs.m_y;
+			m_z = m_z + rhs.m_z;
+
+			return *this;
 		}
 
-		void Vector3::Scale(float scaleUnit)
+
+
+
+		Vector3 & Vector3::operator-=(const Vector3 & rhs)
 		{
-			x *= scaleUnit;
-			y *= scaleUnit;
-			z *= scaleUnit;
+			m_x = m_x - rhs.m_x;
+			m_y = m_y - rhs.m_y;
+			m_z = m_z - rhs.m_z;
+
+			return *this;
 		}
 
-		float Vector3::SetLength(float newLength)
+		Vector3 & Vector3::operator*=(const Vector3 & rhs)
 		{
-			float oldLen = length;
-			float lenSquared = x * x + y * y + z * z;
-			if (lenSquared == 0) return 0.0f;
+			m_x = m_x * rhs.m_x;
+			m_y = m_y * rhs.m_y;
+			m_z = m_z * rhs.m_z;
 
-			// Calculating new length
-			length = sqrtf(lenSquared);
+			return *this;
+		}
 
-			float inverseScale = newLength / length;
-			x *= inverseScale;
-			y *= inverseScale;
-			z *= inverseScale;
 
-			return oldLen;
+
+
+		Vector3 & Vector3::operator/=(const Vector3 & rhs)
+		{
+			if (rhs.m_x == 0) throw "Division by zero is not defined";
+			if (rhs.m_y == 0) throw "Division by zero is not defined";
+			if (rhs.m_z == 0) throw "Division by zero is not defined";
+
+			m_x = m_x / rhs.m_x;
+			m_y = m_y / rhs.m_y;
+			m_z = m_z / rhs.m_z;
+
+			return *this;
+		}
+
+
+
+		Vector3 Vector3::operator+(const Vector3 & rhs) const
+		{
+			return Vector3(m_x + rhs.m_x, m_y + rhs.m_y, m_z + rhs.m_z);
+		}
+
+		Vector3 Vector3::operator-(const Vector3 & rhs) const
+		{
+			return Vector3(m_x - rhs.m_x, m_y - rhs.m_y, m_z - rhs.m_z);
+		}
+
+
+
+		Vector3 Vector3::operator*(const Vector3 & rhs) const
+		{
+			return Vector3(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z);
+		}
+
+		Vector3 Vector3::operator/(const Vector3 & rhs) const
+		{
+			if (rhs.m_x == 0) throw "Division by zero is not defined";
+			if (rhs.m_y == 0) throw "Division by zero is not defined";
+			if (rhs.m_z == 0) throw "Division by zero is not defined";
+
+			return Vector3(m_x / rhs.m_x, m_y / rhs.m_y, m_z / rhs.m_z);
+		}
+
+
+
+
+		bool Vector3::operator==(const Vector3 & rhs) const
+		{
+			return m_x == rhs.m_x && m_y == rhs.m_y && m_z == rhs.m_z;
+		}
+
+		bool Vector3::operator!=(const Vector3 & rhs) const
+		{
+			return m_x != rhs.m_x || m_y != rhs.m_y || m_z != rhs.m_z;
+		}
+
+
+
+		Vector3 operator*(float scaleUnit, const Vector3 &rhs)
+		{
+			return Vector3(scaleUnit * rhs.m_x, scaleUnit * rhs.m_y, scaleUnit * rhs.m_z);
+		}
+
+		Vector3 operator*(const Vector3 &lhs, float scaleUnit)
+		{
+			return Vector3(scaleUnit * lhs.m_x, scaleUnit * lhs.m_y, scaleUnit * lhs.m_z);
 		}
 	}
 }
