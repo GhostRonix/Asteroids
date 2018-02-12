@@ -8,13 +8,20 @@ namespace Colors
 		/* CTOR */
 		Color();
 		Color(int, int, int);
-		~Color(); //Destructor
+		~Color();
 
-	private:
 		/* VARIABLES */
-		int rojo;
-		int verde;
-		int azul;
-		int Opacity;
+		int red;
+		int green;
+		int blue;
+		int alpha;
 	};
 }
+
+class Color
+{
+public:
+	Color();
+	~Color();
+};
+

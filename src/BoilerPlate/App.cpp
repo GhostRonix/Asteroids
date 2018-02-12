@@ -11,6 +11,10 @@ namespace Engine
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 
+	Asteroids::Entities::PlayerShip* p_ship;  //Variable Global tipo puntero \ (uso de funciones de la clase PlayerShip) 
+
+	const float xmovimiento = 5.0f;
+
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
 		, m_width(width)
@@ -19,6 +23,7 @@ namespace Engine
 		, m_timer(new TimeManager)
 		, m_mainWindow(nullptr)
 	{
+		p_ship = new Asteroids::Entities::PlayerShip(m_width, m_height);
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 	}
@@ -80,7 +85,19 @@ namespace Engine
 	{		
 		switch (keyBoardEvent.keysym.scancode)
 		{
-		default:			
+		case SDL_SCANCODE_UP:
+			p_ship->MoveForward(Engine::Math::Vector2(0.0f, xmovimiento));
+			break;
+		case SDL_SCANCODE_LEFT:
+			p_ship->MoveForward(Engine::Math::Vector2(-xmovimiento, 0.0f));
+			break;
+		case SDL_SCANCODE_RIGHT:
+			p_ship->MoveForward(Engine::Math::Vector2(xmovimiento, 0.0f));
+			break;
+		case SDL_SCANCODE_DOWN:
+			p_ship->MoveForward(Engine::Math::Vector2(0.0f, -xmovimiento));
+			break;
+		default:
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
 			break;
 		}
@@ -127,12 +144,16 @@ namespace Engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBegin(GL_LINE_LOOP);
+		p_ship->Render(); // Renderizar la Nave
+
+		/*glBegin(GL_LINE_LOOP);
 		glVertex2f(50.0, 50.0);
 		glVertex2f(50.0, -50.0);
 		glVertex2f(-50.0, -50.0);
 		glVertex2f(-50.0, 50.0);
 		glEnd();
+		*/ // Coordenadas del cuadrado
+
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}

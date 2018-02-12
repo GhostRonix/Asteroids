@@ -1,7 +1,12 @@
+
 #pragma once
+
+
 
 #ifndef _VECTOR2_H_
 #define _VECTOR2_H_
+
+#include<iostream>
 
 namespace Engine
 {
@@ -10,51 +15,65 @@ namespace Engine
 		class Vector2
 		{
 		public:
-			/* =============================================================
-			* STATIC
-			* ============================================================= */
-			static Vector2 Origin;
 
-			/* =============================================================
-			* CTOR
-			* ============================================================= */
+			/*============================
+			*		  STATIC
+			============================*/
+			static Vector2 origin;
+
+
+
+
+			/*============================
+			*			CTOR
+			============================*/
 			Vector2();
-			Vector2(float uniform);
-			Vector2(float x, float y);
+			Vector2(float, float);
+			Vector2(float);
 
-			/* =============================================================
-			* PUBLIC FUNCTIONS
-			* ============================================================= */
-			float Length() const;
-			float SquaredLength() const;
-			float Vector2::Normalize();
 
-			/* =============================================================
-			* OPERATORS
-			* ============================================================= */
-			Vector2& operator=(const Vector2& rhs);
-			Vector2& operator+=(const Vector2& rhs);
-			Vector2& operator-=(const Vector2& rhs);
-			Vector2& operator*=(const Vector2& rhs);
-			Vector2& operator/=(const Vector2& rhs);
-			Vector2 operator+(const Vector2& rhs) const;
-			Vector2 operator-(const Vector2& rhs) const;
-			Vector2 operator-() const;
-			Vector2 operator*(const Vector2& rhs) const;
-			Vector2 operator/(const Vector2& rhs) const;
-			bool operator==(const Vector2& rhs) const;
-			bool operator!=(const Vector2& rhs) const;
-			friend Vector2 operator*(float scaleUnit, const Vector2& rhs);
-			friend Vector2 operator*(const Vector2& lhs, float scaleUnit);
 
-			/* =============================================================
-			* MEMBERS
-			* ============================================================= */
-			float x;
-			float y;
-			float length;
+
+			/*============================
+			*	  PUBLIC FUNCTIONS
+			============================*/
+			float Lenght() const;
+			float SquaredLenght() const;
+			Vector2 Normalize();
+
+
+
+
+			/*============================
+			*		  OPERATORS
+			============================*/
+			Vector2& operator=(const Vector2&);
+			Vector2& operator+=(const Vector2&);
+			Vector2& operator-=(const Vector2&);
+			Vector2& operator*=(const Vector2&);
+			Vector2& operator/=(const Vector2&);
+			Vector2 operator+(const Vector2&) const;
+			Vector2 operator-(const Vector2&) const;
+			Vector2 operator*(const Vector2&) const;
+			Vector2 operator/(const Vector2&) const;
+			bool	operator==(const Vector2&) const;
+			bool	operator!=(const Vector2&) const;
+			friend  Vector2 operator*(float, const Vector2&);
+			friend  Vector2 operator*(const Vector2&, float);
+
+
+
+
+			/*============================
+			*		  MEMBERS
+			============================*/
+			float m_x;
+			float m_y;
+			float m_lenght;
 		};
 	}
 }
+
+
 
 #endif // !_VECTOR2_H_

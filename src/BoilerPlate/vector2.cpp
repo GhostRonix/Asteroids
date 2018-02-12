@@ -1,182 +1,202 @@
-#include "Vector2.h"
-#include <cmath>
+#include "vector2.h"
 
 namespace Engine
 {
+
 	namespace Math
 	{
-		Vector2 Vector2::Origin = Vector2();
+
+		Vector2 Vector2::origin = Vector2();
 
 		Vector2::Vector2()
-			: x(0.0f)
-			, y(0.0f)
-			, length(0.0f)
+			: m_x(0.0f)
+			, m_y(0.0f)
+			, m_lenght(0.0f)
 		{}
 
-		Vector2::Vector2(float uniform)
-			: x(uniform)
-			, y(uniform)
-			, length(0)
-		{
-			// Calculate length for the given point
-			//
-			Length();
-		}
 
 		Vector2::Vector2(float x, float y)
-			: x(x)
-			, y(y)
-			, length(0)
+			: m_x(x)
+			, m_y(y)
+			, m_lenght(0.0f)
 		{
-			// Calculate length for the given point
-			//
-			Length();
+			Lenght();
 		}
 
-		float Vector2::Length() const
+
+
+		Vector2::Vector2(float uniform)
+			: m_x(uniform)
+			, m_y(uniform)
+			, m_lenght(0.0f)
 		{
-			return std::sqrt(x * x + y * y);
+			Lenght();
 		}
 
-		float Vector2::SquaredLength() const
+		float Vector2::Lenght() const
 		{
-			return x * x + y * y;
+			return std::sqrt(m_x * m_x + m_y * m_y);
 		}
 
-		float Vector2::Normalize()
+		float Vector2::SquaredLenght() const
 		{
-			// Calculating the length
-			Length();
-
-			float inverseScale = 1.0f / length;
-			x *= inverseScale;
-			y *= inverseScale;
-
-			return length;
+			return m_x * m_x + m_y * m_y;
 		}
 
-		// operators
-		//
-		Vector2& Vector2::operator=(const Vector2& rhs)
+
+
+		Vector2 Vector2::Normalize()
 		{
-			// Prevent self assignment. Two objects
-			// are equal if their memory address are equal.
+			Lenght();
+
+			float inverseScale = 1.0f / m_lenght;
+			m_x *= inverseScale;
+			m_y *= inverseScale;
+			return m_lenght;
+		}
+
+
+
+
+		Vector2 & Vector2::operator=(const Vector2 & rhs)
+		{
+			// TODO: insert return statement here
 			if (this == &rhs)
 			{
 				return *this;
 			}
-
-			x = rhs.x;
-			y = rhs.y;
+			m_x = rhs.m_x;
+			m_y = rhs.m_y;
 
 			return *this;
+
+
+
 		}
 
-		Vector2& Vector2::operator+=(const Vector2& rhs)
+		Vector2 & Vector2::operator+=(const Vector2 & rhs)
 		{
-			x = x + rhs.x;
-			y = y + rhs.y;
+			m_x = m_x + rhs.m_x;
+			m_y = m_y + rhs.m_y;
 
 			return *this;
 		}
 
-		Vector2& Vector2::operator-=(const Vector2& rhs)
+
+
+		Vector2 & Vector2::operator-=(const Vector2 & rhs)
 		{
-			x = x - rhs.x;
-			y = y - rhs.y;
+			m_x = m_x - rhs.m_x;
+			m_y = m_y - rhs.m_y;
 
 			return *this;
 		}
 
-		Vector2& Vector2::operator*=(const Vector2& rhs)
+
+
+
+		Vector2 & Vector2::operator*=(const Vector2 & rhs)
 		{
-			x = x * rhs.x;
-			y = y * rhs.y;
+			m_x = m_x * rhs.m_x;
+			m_y = m_y * rhs.m_y;
 
 			return *this;
 		}
 
-		Vector2& Vector2::operator/=(const Vector2& rhs)
+
+
+		Vector2 & Vector2::operator/=(const Vector2 & rhs)
 		{
-			x = x / rhs.x;
-			y = y / rhs.y;
+			if (rhs.m_x == 0) throw "Division by zero is not defined";
+			if (rhs.m_y == 0) throw "Division by zero is not defined";
+
+			m_x = m_x / rhs.m_x;
+			m_y = m_y / rhs.m_y;
 
 			return *this;
 		}
 
-		Vector2 Vector2::operator+(const Vector2& rhs) const
+
+
+
+		Vector2 Vector2::operator+(const Vector2 & rhs) const
 		{
 			Vector2 sum;
 
-			sum.x = x + rhs.x;
-			sum.y = y + rhs.y;
+			sum.m_x = m_x + rhs.m_x;
+			sum.m_y = m_y + rhs.m_y;
 
 			return sum;
 		}
 
-		Vector2 Vector2::operator-(const Vector2& rhs) const
+
+
+		Vector2 Vector2::operator-(const Vector2 & rhs) const
 		{
 			Vector2 sub;
-			sub.x = x - rhs.x;
-			sub.y = y - rhs.y;
+
+			sub.m_x = m_x - rhs.m_x;
+			sub.m_y = m_y - rhs.m_y;
 
 			return sub;
 		}
 
-		Vector2 Vector2::operator-() const
-		{
-			return Vector2(-x, -y);
-		}
 
-		Vector2 Vector2::operator*(const Vector2& rhs) const
+
+		Vector2 Vector2::operator*(const Vector2 & rhs) const
 		{
 			Vector2 scaled;
 
-			scaled.y = y * rhs.y;
-			scaled.x = x * rhs.x;
+			scaled.m_x = m_x * rhs.m_x;
+			scaled.m_y = m_y * rhs.m_y;
 
 			return scaled;
 		}
 
-		Vector2 Vector2::operator/(const Vector2& rhs) const
+
+
+		Vector2 Vector2::operator/(const Vector2 & rhs) const
 		{
 			Vector2 inverseScaled;
 
-			inverseScaled.x = x / rhs.x;
-			inverseScaled.y = y / rhs.y;
+			inverseScaled.m_x = m_x / rhs.m_x;
+			inverseScaled.m_y = m_y / rhs.m_y;
 
 			return inverseScaled;
 		}
 
-		bool Vector2::operator==(const Vector2& rhs) const
+
+
+		bool Vector2::operator==(const Vector2 & rhs) const
 		{
-			return
-				x == rhs.x &&
-				y == rhs.y;
+			return m_x == rhs.m_x && m_y == rhs.m_y;
 		}
 
-		bool Vector2::operator!=(const Vector2& rhs) const
+
+
+		bool Vector2::operator!=(const Vector2 & rhs) const
 		{
-			return
-				x != rhs.x ||
-				y != rhs.y;
+			return m_x != rhs.m_x || m_y != rhs.m_y;
 		}
 
-		// friend functions
-		Vector2 operator*(float scaleUnit, const Vector2& rhs)
+
+
+		Vector2 operator*(float scaledUnit, const Vector2 &rhs)
 		{
 			Vector2 scaled;
-			scaled.x = scaleUnit * rhs.x;
-			scaled.y = scaleUnit * rhs.y;
+
+			scaled.m_x = scaledUnit * rhs.m_x;
+			scaled.m_y = scaledUnit * rhs.m_y;
 
 			return scaled;
 		}
 
-		Vector2 operator*(const Vector2& lhs, float scaleUnit)
+		Vector2 operator*(const Vector2 &lhs, float scaleUnit)
 		{
 			Vector2 scaled;
-			scaled.x = scaleUnit * lhs.x;
-			scaled.y = scaleUnit * lhs.y;
+
+			scaled.m_x = scaleUnit * lhs.m_x;
+			scaled.m_y = scaleUnit * lhs.m_y;
 
 			return scaled;
 		}
