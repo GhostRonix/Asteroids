@@ -22,19 +22,28 @@ namespace Asteroids
 			/*============================
 			*	  PUBLIC FUNCTIONS
 			============================*/
-			void MoveForward(const Engine::Math::Vector2&);
+			void MoveForward(const Engine::Math::Vector2&); //const Engine::Math::Vector2&
 			void Render();
 			void Update();
 			void RotateLeft();
 			void RotateRight();
+			//void Move(const Engine::Math::Vector2& unit);
 
 		private:
 			/*============================
 			*		  MEMBERS
 			============================*/
 			Engine::Math::Vector2* m_position;
-			float m_width;
-			float m_height;
+			/*MAX*/
+			float m_maxwidth;
+			float m_maxheight;
+			/*MIN*/
+			float m_minwidth;
+			float m_minheight;
+
+			
+
+			
 		};
 	}
 }

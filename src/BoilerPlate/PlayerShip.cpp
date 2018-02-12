@@ -4,6 +4,7 @@
 
 #include "Vector2.h"
 
+
 #include <GL\glew.h>
 #include <SDL2\SDL_opengl.h>
 
@@ -17,21 +18,54 @@ namespace Asteroids
 		PlayerShip::PlayerShip(int width, int height)
 		{
 			m_position = new Engine::Math::Vector2(Engine::Math::Vector2::origin);
-			m_width = width / 1.0f;
-			m_height = height / 1.0f;
+
+			/*PD*/
+			/*max dim.*/
+			m_maxwidth = width / 3.0f;
+			m_maxheight = height / 3.0f;
+			/*min dim*/
+			m_minwidth = -width / 3.0f;
+			m_minheight = -height / 3.0f;
+
 		}
+
+	
 
 		PlayerShip::~PlayerShip()
 		{}
 
-		void PlayerShip::MoveForward(const Engine::Math::Vector2& a)
-		{
-			float x = m_position->m_x + a.m_x;
-			float y = m_position->m_y + a.m_y;
 
-			m_position->m_x += x;
-			m_position->m_y += y;
+		//Inline Fucntion to avoid multi-definition problems.
+
+		inline float LigthSpeedWarp(float var, float min, float max)
+		{
+			if (var < min) return max - (min - var);
+			if (var > max) return min + (var - max);
+			
+			return var;
+
 		}
+		//Update
+
+		void PlayerShip::Update()
+		{}
+
+		void PlayerShip::MoveForward(const Engine::Math::Vector2& auxunit)
+		{
+			float x = m_position -> m_x + auxunit.m_x;
+			float y = m_position -> m_y + auxunit.m_y;
+
+			m_position -> m_x = LigthSpeedWarp(x, m_minwidth, m_maxwidth);
+			m_position -> m_y = LigthSpeedWarp(y, m_minheight, m_minheight);
+		}
+
+		
+
+
+	
+       
+		//Render
+
 
 		void PlayerShip::Render()
 		{
@@ -51,9 +85,7 @@ namespace Asteroids
 
 		}
 
-		void PlayerShip::Update()
-		{}
-
+	
 		void PlayerShip::RotateLeft()
 		{}
 
