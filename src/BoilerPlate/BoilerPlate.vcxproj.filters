@@ -24,6 +24,12 @@
     <ClCompile Include="MathUtilities.cpp">
       <Filter>WorkZone\Source</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyAsteroid.cpp">
+      <Filter>WorkZone\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>WorkZone\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -45,6 +51,12 @@
       <Filter>WorkZone\Headers</Filter>
     </ClInclude>
     <ClInclude Include="MathUtilities.h">
+      <Filter>WorkZone\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAsteroid.h">
+      <Filter>WorkZone\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
       <Filter>WorkZone\Headers</Filter>
     </ClInclude>
   </ItemGroup>
