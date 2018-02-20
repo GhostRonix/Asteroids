@@ -10,6 +10,7 @@
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 #include "PlayerShip.h"
+#include "EnemyAsteroid.h"
 
 namespace Engine
 {
@@ -58,6 +59,10 @@ namespace Engine
 		/* =============================================================
 		 * MEMBERS
 		 * ============================================================= */
+		/*PMembers for playership and asteroids*/
+		Asteroids::Entities::PlayerShip* p_ship;
+		Asteroids::Entity*               m_asteroid;
+		
 		int									m_width;
 		int									m_height;
 		int									m_nUpdates;
@@ -67,6 +72,8 @@ namespace Engine
 		SDL_GLContext						m_context;
 		GameState::State					m_state;
 		Engine::TimeManager*				m_timer;
+
+
 
 	};
 }

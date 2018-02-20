@@ -1,21 +1,21 @@
 #pragma once
 
+#ifndef _ASTEROID_H_
+#define _ASTEROID_H_
+
 #include <vector>
 
 #include "Entity.h"
-
-
-
-#ifndef _ENEMYASTEROID_H_
-#define _ENEMYASTEROID_H_
+#include "Vector2.h"
 
 namespace Asteroids
 {
-
-	class EnemyAsteroid 
+	class Asteroid : public Entity
 	{
 	public:
-
+		/* =============================================================
+		* ENUMERATORS
+		* ============================================================= */
 		struct AsteroidSize
 		{
 			enum Size
@@ -23,32 +23,24 @@ namespace Asteroids
 				BIG = 0,
 				MEDIUM = 1,
 				SMALL = 2,
-
-
 			};
 		};
+
+		/* =============================================================
+		* PUBLIC FUNCTIONS
+		* ============================================================= */
+		Asteroid(AsteroidSize::Size, int, int);
+		void ApplyImpulse(Engine::Math::Vector2) override;
+		void Update(float);
+		void Render() override;
+		AsteroidSize::Size					  GetSize();
+	private:
+		std::vector<Engine::Math::Vector2>    m_points;
+		AsteroidSize::Size					  m_size;
+		int									  m_sizeFactor;
+		float								  m_angle;
+		float								  m_rotation;
 	};
+}
 
-	//Public Functuion Declarations
-
-	EnemyAsteroid   (AsteroidSize::Size, int, int);
-	void Impulse   (Engine::Math::Vector2) override;
-	void Update    (float);
-	void Render() override;
-	AsteroidSize::Size   GetSize();
-
-
-
-	//Private members
-private:
-
-	std::vector<Engine::Math::Vector2> m_points;
-	AsteroidSize::Size  m_size;
-
-	int m_sizeFactor;
-	float m_angle;
-	float m_rotation;
-
-};
-
-#endif // !_ENEMYASTEROID_H_               
+#endif // !_ASTEROID_H_

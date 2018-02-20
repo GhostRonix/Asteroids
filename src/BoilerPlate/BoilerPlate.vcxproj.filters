@@ -27,6 +27,9 @@
     <ClCompile Include="EnemyAsteroid.cpp">
       <Filter>WorkZone\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>WorkZone\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="IncludeGL.h" />
+    <ClInclude Include="Entity.h">
+      <Filter>WorkZone\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

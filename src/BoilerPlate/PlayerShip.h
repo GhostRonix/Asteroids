@@ -1,45 +1,58 @@
 #pragma once
-#pragma once
+
 #ifndef _PLAYER_SHIP_HPP_
 #define _PLAYER_SHIP_HPP_
-
+#include "Entity.h"
 #include "Vector2.h"
 
 namespace Asteroids
 {
 	namespace Entities
 	{
-		class PlayerShip
+		class PlayerShip:Entity
 		{
 		public:
 			/*============================
 			*			CTOR
 			============================*/
-			PlayerShip();
+			
 			PlayerShip(int, int);
-			~PlayerShip();
+			//~PlayerShip();
 
 			/*============================
 			*	  PUBLIC FUNCTIONS
 			============================*/
-			void MoveForward(const Engine::Math::Vector2&); //const Engine::Math::Vector2&
-			void Render();
-			void Update();
-			void RotateLeft();
-			void RotateRight();
+			/*Void Inline Function*/
+			inline void ToggleMove() { m_moving = !m_moving; }
+			/*-----------------------------------------------------*/
+
+
+			void MoveForward(void); //const Engine::Math::Vector2&
+			void Render(void);
+			void Update(float deltaTime);
+			void RotateLeft(void);
+			void RotateRight(void);
 			//void Move(const Engine::Math::Vector2& unit);
 
 		private:
 			/*============================
 			*		  MEMBERS
 			============================*/
-			Engine::Math::Vector2* m_position;
-			/*MAX*/
+			/*Engine::Math::Vector2* m_position;
+			/*MAX/
 			float m_maxwidth;
 			float m_maxheight;
-			/*MIN*/
+			/*MIN/
 			float m_minwidth;
-			float m_minheight;
+			float m_minheight;**/
+			float   m_angle;
+			float   m_currentSpeed;
+			bool    m_gasOn;
+			bool	m_moving;
+			std::vector<Engine::Math::Vector2> m_points;
+			/*
+			* PRIVATE FUNCTIONS
+			*/
 
 			
 

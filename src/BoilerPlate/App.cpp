@@ -23,13 +23,27 @@ namespace Engine
 		, m_timer(new TimeManager)
 		, m_mainWindow(nullptr)
 	{
+		//Player Ship
 		p_ship = new Asteroids::Entities::PlayerShip(m_width, m_height);
+		//Asteroids
+		m_asteroid = new Asteroids::Asteroid(Asteroids::Asteroid::AsteroidSize::MEDIUM, m_width, m_height);
+	   //	gs
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 	}
 
 	App::~App()
 	{
+		if (p_ship)
+		{
+			delete p_ship;
+		}
+
+		if (m_asteroid)
+		{
+			delete m_asteroid;
+		}
+
 		CleanupSDL();
 	}
 
@@ -86,19 +100,28 @@ namespace Engine
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_UP:
-			p_ship->MoveForward(Engine::Math::Vector2(0.0f, xmovimiento));
+
+			SDL_Log("Moving Foward");
+			p_ship->MoveForward();
+			//p_ship->MoveForward(Engine::Math::Vector2(0.0f, xmovimiento));
 			break;
 		case SDL_SCANCODE_LEFT:
-			p_ship->MoveForward(Engine::Math::Vector2(-xmovimiento, 0.0f));
+			SDL_Log("Moving Left");
+			p_ship->RotateLeft();
+			//p_ship->MoveForward(Engine::Math::Vector2(-xmovimiento, 0.0f));
 			break;
 		case SDL_SCANCODE_RIGHT:
-			p_ship->MoveForward(Engine::Math::Vector2(xmovimiento, 0.0f));
+			SDL_Log("Moving Right");
+			p_ship->RotateRight();
+			//p_ship->MoveForward(Engine::Math::Vector2(xmovimiento, 0.0f));
 			break;
-		case SDL_SCANCODE_DOWN:
+		/*case SDL_SCANCODE_DOWN:
 			p_ship->MoveForward(Engine::Math::Vector2(0.0f, -xmovimiento));
-			break;
+			break;*/
 		default:
-			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
+			SDL_Log("Physical %s key acting as %s key",
+				SDL_GetScancodeName(keyBoardEvent.keysym.scancode),
+				SDL_GetKeyName(keyBoardEvent.keysym.sym));
 			break;
 		}
 	}
@@ -107,6 +130,8 @@ namespace Engine
 	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
+		case SDL_SCANCODE_UP:
+			p_ship->ToggleMove();
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();
 			break;
@@ -119,9 +144,13 @@ namespace Engine
 	void App::Update()
 	{
 		double startTime = m_timer->GetElapsedTimeInSeconds();
+//playership & asteroids Updates
 
-		// Update code goes here
-		//
+		p_ship->Update(DESIRED_FRAME_TIME);
+		m_asteroid->Update(DESIRED_FRAME_TIME);
+
+
+		/*-------------------------------------------*/
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;
@@ -145,6 +174,7 @@ namespace Engine
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		p_ship->Render(); // Renderizar la Nave
+		m_asteroid->Render(); // Renderizar asteroids
 
 		/*glBegin(GL_LINE_LOOP);
 		glVertex2f(50.0, 50.0);

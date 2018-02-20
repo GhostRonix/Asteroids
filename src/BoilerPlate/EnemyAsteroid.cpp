@@ -1,85 +1,82 @@
 #include "EnemyAsteroid.h"
+#include "IncludeGL.h"
+#include <cmath>
+#include <cstdlib>
 
-
-
-#include "IncludeGL.hpp"
- #include <cmath>
- #include <cstdlib>
-
-namespace Asteroids
- {
+namespace Game
+{
 	const size_t NUM_POINTS = 16;
 	const float MIN_SIZE = 25.0f;
 	const float MAX_SIZE = 45.0f;
-	
-			// TODO: RR: Move this to an utility class
-			//
-		const float PI = 3.141592653f;
-	
-		EnemyAsteroid::EnemyAsteroid(AsteroidSize::Size size, int width, int height)
-		 : m_size(size)
-		 , m_angle(0.0f)
-		 , m_rotation(120)
-		 , Entity(width, height)
-		 {
+
+	// TODO: RR: Move this to an utility class
+	//
+	const float PI = 3.141592653f;
+
+	Asteroid::Asteroid(AsteroidSize::Size size, int width, int height)
+		: m_size(size)
+		, m_angle(0.0f)
+		, m_rotation(120)
+		, Entity(width, height)
+	{
 		m_sizeFactor = (int)size + 1;
-		
-					// Calculating the MIN/MAX size of the asteroid based on the size enum value
-					//
+
+		// Calculating the MIN/MAX size of the asteroid based on the size enum value
+		//
 		float min = MIN_SIZE / m_sizeFactor;
 		float max = MAX_SIZE / m_sizeFactor;
-		
-					//type = ASTEROID_PLAYERTYPE;
-			
-			for (size_t i = 0; i < NUM_POINTS; ++i)
-			 {
+
+		//type = ASTEROID_PLAYERTYPE;
+
+		for (size_t i = 0; i < NUM_POINTS; ++i)
+		{
 			const float radians = (i / (float)NUM_POINTS) * 2.0f * PI;
-						// TODO: RR: Move this to a rand in range function
-				const float randDist = min + (max - min) * (rand() / (float)RAND_MAX);
-			
-				+m_points.push_back(Engine::Math::Vector2(sinf(radians) * randDist, cosf(radians) * randDist));
-			}
-		
-			m_radio = (min + max) * 0.5f;
+			// TODO: RR: Move this to a rand in range function
+			const float randDist = min + (max - min) * (rand() / (float)RAND_MAX);
+
+			m_points.push_back(Engine::Math::Vector2(sinf(radians) * randDist, cosf(radians) * randDist));
 		}
-	
-		void EnemyAsteroid::Update(float deltaTime)
-		 {
-				// Rotate the asteroid.
-					//
-			m_angle += m_rotation * deltaTime;
-		
-			Entity::Update(deltaTime);
-		}
-	
-		void Asteroid::ApplyImpulse(Engine::Math::Vector2 Impulse)
-		 {
+
+		m_radius = (min + max) * 0.5f;
+	}
+
+	void Asteroid::Update(float deltaTime)
+	{
+		// Rotate the asteroid.
+		//
+		m_angle += m_rotation * deltaTime;
+
+		Entity::Update(deltaTime);
+	}
+
+	void Asteroid::ApplyImpulse(Engine::Math::Vector2 impulse)
+	{
 		if (m_mass > 0)
-			 {
+		{
 			m_velocity.x += (impulse.x / m_mass) * cosf(m_rotation * (PI / 180)) + m_sizeFactor;
 			m_velocity.y += (impulse.y / m_mass) * sinf(m_rotation * (PI / 180)) + m_sizeFactor;
-			}
 		}
-	
-		Asteroid::AsteroidSize::Size Asteroid::GetSize()
-		 {
+	}
+
+	Asteroid::AsteroidSize::Size Asteroid::GetSize()
+	{
 		return m_size;
-		}
-	
-		void Asteroid::Render()
-		 {
+	}
+
+	void Asteroid::Render()
+	{
 		glLoadIdentity();
 		glTranslatef(m_position.x, m_position.y, 0.0f);
 		glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
-		
-			glBegin(GL_LINE_LOOP);
-		
-			std::vector<Engine::Math::Vector2>::iterator it = m_points.begin();
+
+		glBegin(GL_LINE_LOOP);
+
+		std::vector<Engine::Math::Vector2>::iterator it = m_points.begin();
 		for (; it != m_points.end(); ++it)
-			 {
+		{
 			glVertex2f((*it).x, (*it).y);
-			}
-		
-			glEnd();
 		}
+
+		glEnd();
 	}
+}
