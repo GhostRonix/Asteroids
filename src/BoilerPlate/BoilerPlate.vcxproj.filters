@@ -24,6 +24,12 @@
     <ClCompile Include="MathUtilities.cpp">
       <Filter>WorkZone\Source</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyAsteroid.cpp">
+      <Filter>WorkZone\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>WorkZone\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -47,6 +53,14 @@
     <ClInclude Include="MathUtilities.h">
       <Filter>WorkZone\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyAsteroid.h">
+      <Filter>WorkZone\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="IncludeGL.h" />
+    <ClInclude Include="Entity.h">
+      <Filter>WorkZone\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -67,5 +81,8 @@
     <Filter Include="WorkZone\Headers">
       <UniqueIdentifier>{bf679198-19b8-4eb1-9495-68a4e1ce2aa9}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BoilerPlate.rc" />
   </ItemGroup>
 </Project>
